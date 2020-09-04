@@ -16,26 +16,45 @@ ruleTester.run('no-unused-vars', rule, {
 const a = 5;
 console.log(a);
     `,
-    `
-enum MY_ENUM {
-  'FIRST_VALUE',
-  'SECOND_VALUE',
-}
-console.log(MY_ENUM.FIRST_VALUE);
-console.log(MY_ENUM.SECOND_VALUE);
-    `,
   ],
   invalid: [
     {
       code: `
-const a = 5;
+enum MY_ENUM {
+  FIRST_VALUE,
+  SECOND_VALUE,
+}
       `,
       errors: [
         {
           messageId: 'unusedVar',
           data: {
-            varName: 'a',
-            action: 'assigned a value',
+            varName: 'MY_ENUM',
+            action: 'defined',
+            additional: '',
+          },
+        },
+        {
+          messageId: 'unusedVar',
+          data: {
+            varName: 'MY_ENUM',
+            action: 'defined',
+            additional: '',
+          },
+        },
+        {
+          messageId: 'unusedVar',
+          data: {
+            varName: 'FIRST_VALUE',
+            action: 'defined',
+            additional: '',
+          },
+        },
+        {
+          messageId: 'unusedVar',
+          data: {
+            varName: 'SECOND_VALUE',
+            action: 'defined',
             additional: '',
           },
         },
